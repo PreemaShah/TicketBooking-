@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {Text,View,ImageBackground,Image,Alert,TouchableOpacity,Linking} from 'react-native';
+import {Text,View,ImageBackground,Image,Alert,TouchableOpacity,Linking,AsyncStorage} from 'react-native';
 import {Card,CardItem,Header,Input,Button} from "../Components/Common";
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 class LoginForm extends Component
@@ -22,15 +22,18 @@ class LoginForm extends Component
                 password:this.state.password
             })
         }).then((response)=>response.json()).then((responseJson)=>{
-           var success=JSON.stringify(responseJson);
-           var succ=JSON.stringify("success");
-           if(success===succ)
+           var token=JSON.stringify(responseJson);
+           AsyncStorage.setItem('userToken',token);
+           var succ=JSON.stringify("failed");
+           if(token===succ)
            {
-               var { navigate } = this.props.navigation;
-              navigate('Home')
+               Alert.alert('Please enter correct details');
            }
            else{
-               Alert.alert('Please enter correct details');
+               console.log(token);
+               var { navigate } = this.props.navigation;
+               navigate('Home')
+
            }
         }).catch((error)=>{
             console.error(error);
