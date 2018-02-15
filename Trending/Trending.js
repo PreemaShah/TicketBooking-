@@ -1,50 +1,33 @@
 import React,{Component} from 'react';
-import {Text,View,Dimensions,Image} from 'react-native';
-import {Card,CardItem} from "../Components/Common";
-import ResponsiveImage from 'react-native-responsive-image';
+import {Text,View,Dimensions,Image,ScrollView,TouchableOpacity,Modal,Button,ActivityIndicator,StyleSheet} from 'react-native';
+import MoviePoster from '../Components/MoviePoster'
 class Trending extends Component
 {
-
     render()
     {
-        let {height, width} = Dimensions.get('window');
-        console.log(height);
-        console.log(width);
-        return(
-            <View>
-            <View style={{ flexGrow: 1, justifyContent: 'flex-start', flexDirection: 'row' }}>
-                <CardItem style={styles.cardItemStyle}>
-            <ResponsiveImage
-                source={{uri:'/Users/lanet/Desktop/ReactNative/Examples/TicketBooking/Image/ELEPHANTSHOE_DESKTOP_WALLPAPER_OCTOBER_2012.jpg'}}
-                initWidth='415'
-                initHeight="150">
-            </ResponsiveImage>
-                </CardItem>
-            </View>
-                <View style={{ flexGrow: 1, justifyContent: 'flex-start', flexDirection: 'row' }}>
-                <CardItem style={styles.cardItemStyle}>
-                    <ResponsiveImage
-                        source={{uri:'/Users/lanet/Desktop/ReactNative/Examples/TicketBooking/Image/index.jpg'}}
-                        initWidth='415'
-                        initHeight="150"
-                        >
-                    </ResponsiveImage>
-                </CardItem>
-                </View>
-            </View>
+
+                            return (
 
 
-        )
+                                       <ScrollView contentContainerStyle={styles.scrollStyle}
+                                                    showsHorizontalScrollIndicator={false}
+                                                    showsVerticalScrollIndicator={false}
+                                                    >
+                                           <View style={styles.container}>
+                                        <MoviePoster page='Trending'
+                                                     {...this.props}/>
+                                           </View>
+                                       </ScrollView>
+
+
+                            )
     }
-};
-const styles = {
-    cardItemStyle:{
-        borderBottomWidth:1,
-        padding:5,
-        justifyContent:'flex-start',
-        flexDirection:'row',
-        borderColor:'#ddd',
 
+}
+const styles = {
+    container:{
+        paddingTop:20,
     }
 }
 export default Trending;
+
