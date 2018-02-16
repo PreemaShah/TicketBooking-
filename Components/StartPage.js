@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import {Text,View,ImageBackground,Image} from 'react-native';
 import {Button,CardItem,Card} from './Common';
+import {NavigationActions} from 'react-navigation'
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 class StartPage extends Component
 {
@@ -22,8 +23,19 @@ class StartPage extends Component
     }
     Home()
     {
-        var { navigate } = this.props.navigation;
-        navigate('Home')
+       /* var { navigate } = this.props.navigation;
+        navigate('Home')*/
+       this.props.navigation.dispatch(NavigationActions.reset({
+               index:0,
+                actions:[
+                    NavigationActions.navigate(
+                        {
+                            routeName:'Home'
+                        }
+                    )
+                ]
+           }))
+
     }
 
 

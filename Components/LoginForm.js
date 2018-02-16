@@ -76,8 +76,7 @@ class LoginForm extends Component
                             <CardItem style={styles.cardItemStyle}>
                                 <Button onPress={this.onButtonClick.bind(this)}
                                 style={styles.ButtonStyle}
-                                >
-                                    LogIn
+                                >LogIn
                                 </Button>
                             </CardItem>
                         </Card>
@@ -87,17 +86,20 @@ class LoginForm extends Component
                             <Card style={styles.containerStyleImg}>
                             <CardItem style={styles. IconcardItemStyle}>
                         <Image source={{uri:'/Users/lanet/Desktop/ReactNative/Examples/TicketBooking/Image/facebook-logo-button.png'}}
-                               style={{height:50,width:50}}
+                               resizeMode={'contain'}
+                               style={{height:responsiveHeight(10),width:responsiveWidth(20)}}
                         />
                                 <TouchableOpacity onPress={()=>{Linking.openURL('http://localhost:3000/github')}}>
                                 <Image source={{uri:'/Users/lanet/Desktop/ReactNative/Examples/TicketBooking/Image/github-logo.png'}}
-                                       style={{height:50,width:50}}
+                                       resizeMode={'contain'}
+                                       style={{height:responsiveHeight(10),width:responsiveWidth(20)}}
                                 />
                                 </TouchableOpacity>
 
                                 <TouchableOpacity onPress={()=>{Linking.openURL('http://localhost:3000/auth/google')}}>
                                     <Image source={{uri:'/Users/lanet/Desktop/ReactNative/Examples/TicketBooking/Image/google-plus-logo-button.png'}}
-                                           style={{height:50,width:50}}
+                                           resizeMode={'contain'}
+                                           style={{height:responsiveHeight(10),width:responsiveWidth(20)}}
                                     />
                                 </TouchableOpacity>
                             </CardItem>

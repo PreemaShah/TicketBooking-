@@ -184,7 +184,7 @@ const styles = {
         ...DefaultStylr.text,
         fontSize:responsiveFontSize(1.5),
         paddingLeft:5,
-        marginRight:responsiveWidth(10)
+        marginRight:responsiveWidth(35)
     },
     ModalButton:{
         justifyContent: 'flex-end'

@@ -1,4 +1,5 @@
 import React,{Component} from 'react';
+import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 import {Text,View,Image,StyleSheet} from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import Home from '../Home/Home';
@@ -10,7 +11,7 @@ const MyTab = TabNavigator(
         navigationOptions: {
             tabBarIcon: ({ tintColor }) => {
                 return (<Image
-                    style={{ width: 25  , height: 25 }}
+                    style={{ width: responsiveWidth(7)  , height:responsiveHeight(4)}}
                     source={require('../Image/home-black-building-symbol.png')}/>);}
         }
 
@@ -20,7 +21,7 @@ const MyTab = TabNavigator(
         navigationOptions: {
             tabBarIcon: ({ tintColor }) => {
                 return (<Image
-                    style={{ width: 25  , height: 25 }}
+                    style={{ width: responsiveWidth(7)  , height:responsiveHeight(4) }}
                     source={require('../Image/star.png')}/>);}
         }
     },
@@ -30,7 +31,8 @@ const MyTab = TabNavigator(
     animationEnabled: true,
     tabBarOptions: {
         activeBackgroundColor: '#e6bab4',
-        showLabel: false
+        showLabel: false,
+
     },
 });
 
