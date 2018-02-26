@@ -3,6 +3,7 @@ import {Text,View,Dimensions,Image,ScrollView,TouchableOpacity,Modal,Button,Acti
 import MoviePoster from '../Components/MoviePoster'
 class Home extends Component
 {
+
     render() {
 
         return (
@@ -13,7 +14,8 @@ class Home extends Component
                         showsVerticalScrollIndicator={false}
             >
                 <View style={styles.container}>
-                    <MoviePoster {...this.props}/>
+                    <MoviePoster home='Home'
+                        {...this.props}/>
                 </View>
             </ScrollView>
 

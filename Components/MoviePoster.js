@@ -1,6 +1,9 @@
 import React,{Component} from 'react';
-import {Text,View,Dimensions,Image,ScrollView,TouchableOpacity,Modal,Button,ActivityIndicator,StyleSheet} from 'react-native';
+import {Text,View,Dimensions,Image,ScrollView,TouchableOpacity,Modal,Button,StyleSheet} from 'react-native';
 import axios from 'axios';
+import {connect} from 'react-redux';
+import { bindActionCreators } from 'redux';
+import {getMovie} from './redux/Action/actionMovie'
 import {DefaultStylr,Card,CardItem} from "../Components/Common";
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 let { width, height } = Dimensions.get('window');
@@ -14,7 +17,6 @@ class MoviePoster extends Component
         super(props)
         this.state={
             modalVisible:false,
-            movie:[],
             loading:false,
             selectedMovie:''
         };
@@ -29,30 +31,20 @@ class MoviePoster extends Component
 
     }
 
-    async componentDidMount()
-    {
+  componentDidMount()
+  {
+      //getState.Movie.page=this.props.page
+      this.props.getMovieAction(this.props);
 
-        this.setState({loading:true})
-        await this.movieDetail().then((data)=>{
-            this.setState({movie:data,loading:false})
-        });
-    }
-    async movieDetail()
+  }
+    shouldComponentUpdate(nextprops,nextstate)
     {
-        var promise = new Promise((resolve,reject)=>{
-            axios.get("http://localhost:3000/Movie?page="+this.props.page).then((response)=>{
-                resolve(response.data);
-
-            }).catch((err)=>{
-                console.log(err);
-                reject();
-            })
-        })
-        return promise;
+        return true
     }
+
     renderItems = () => {
         return (
-            this.state.movie.map((data,key)=>{
+            this.props.movie.map((data,key)=>{
               //  console.log(data.Ratings);
                // if(data.Ratings<=7)
                 return (
@@ -70,6 +62,8 @@ class MoviePoster extends Component
             })
         )
     };
+
+
     renderMovieDetails=(data)=>{
 
                 return(
@@ -92,11 +86,6 @@ class MoviePoster extends Component
     }
     render()
     {
-
-        if(this.state.loading)
-        {
-            return <ActivityIndicator size={'small'}/>
-        }
         return(
 
                 <View style={styles.ViewStyle}>
@@ -130,7 +119,24 @@ class MoviePoster extends Component
 
         )
     }
+}
 
+const mapStateToProps=state=>{
+    return{
+
+        movie:state.Movie.movie
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    //console.log(this.props)
+    return{
+
+        getMovieAction:(props)=>{
+            dispatch(getMovie(props));
+        }
+
+    }
 }
 const styles = {
     container: {
@@ -190,4 +196,5 @@ const styles = {
         justifyContent: 'flex-end'
     },
    }
-export default MoviePoster;
+
+export default connect(mapStateToProps,mapDispatchToProps)(MoviePoster);

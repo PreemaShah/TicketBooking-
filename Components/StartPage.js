@@ -18,6 +18,7 @@ class StartPage extends Component
     }
     Register()
     {
+        debugger
         var { navigate } = this.props.navigation;
         navigate('Registration')
     }

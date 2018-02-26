@@ -1,50 +1,39 @@
 import React,{Component} from 'react';
 import {Text,View,ImageBackground,Image,Alert,TouchableOpacity,Linking} from 'react-native';
 import {Card,CardItem,Header,Input,Button} from "../Components/Common";
+import {connect} from 'react-redux'
+import {UserReg} from '../Components/redux/Action/actionUser'
 class Registration extends Component
 {
     constructor(props){
         super(props)
     }
 
-    state={email:'',password:'',error:'',loading:false,Name:'',UserId:''};
+    state={email:'',password:'',error:'',Name:'',UserId:''};
 
     static navigationOptions = {
         title: 'Welcome',
     };
     onButtonClick(){
-        fetch("http://localhost:3000/users",{
-            method:'POST',
-            headers:{
-                'Accept':'application/json',
-                'Content-Type':'application/json'
-            },
-            body:JSON.stringify({
-                Name:this.state.Name,
-                email:this.state.email,
-                password:this.state.password,
-                UserId:this.state.UserId
+
+        if(this.state.Name===''&& this.state.email===''&&this.state.password===''&&this.state.UserId==='')
+        {
+            alert("Please fill the details");
+        }
+        else
+        {
+
+            this.props.UserReg(this.state.Name,this.state.email,this.state.password,this.state.UserId).then((response)=>{
+                console.log(this.props.user);
+                Alert.alert("user created");
+            }).catch((err)=>{
+                console.log(err);
             })
-        }).then((response)=>response.json()).then((responseJson)=>{
-            var success=JSON.stringify(responseJson);
-            var succ=JSON.stringify("success");
-            if(success===succ)
-            {
-                var { navigate } = this.props.navigation;
-                navigate('Login')
-            }
-            else{
-                Alert.alert('Please enter correct details');
-            }
-        }).catch((error)=>{
-            console.error(error);
-        });
+        }
     }
 
     render()
     {
-
-
         return(
 
             <View>
@@ -106,6 +95,21 @@ class Registration extends Component
     }
 
 };
+const mapStateToProps=state=>
+{
+    return{
+        user:state.RegUser.user
+    }
+};
+
+{/*function mapDispatchToProps(dispatch)
+{
+    return{
+        RegisterUser:()=>{
+            dispatch(UserReg());
+        }
+    }
+}*/}
 const styles ={
     bgImageStyle:{
         height:'100%',
@@ -185,4 +189,4 @@ const styles ={
 };
 
 
-export default Registration;
+export default connect(mapStateToProps,{UserReg})(Registration) ;

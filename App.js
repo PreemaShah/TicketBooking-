@@ -7,6 +7,10 @@ import NavScreen from './Components/NavScreen'
 import ImageResize from './FileUpload/ImageResize'
 import StartPage from './Components/StartPage'
 import Reg from './Components/Registration'
+import {createStore,applyMiddleware} from 'redux';
+import {Provider} from 'react-redux';
+import appReducer from './Components/redux/Reducer'
+import thunk from 'redux-thunk'
 class App extends Component
 {
 
@@ -14,7 +18,11 @@ class App extends Component
     {
         return(
 
-            <NavScreen/>
+            <Provider store={(createStore(appReducer,applyMiddleware(thunk)))}>
+                <NavScreen/>
+            </Provider>
+
+
 
         )
     }

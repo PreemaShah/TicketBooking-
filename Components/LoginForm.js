@@ -2,13 +2,13 @@ import React,{Component} from 'react';
 import {Text,View,ImageBackground,Image,Alert,TouchableOpacity,Linking,AsyncStorage} from 'react-native';
 import {Card,CardItem,Header,Input,Button} from "../Components/Common";
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
+import {connect} from 'react-redux';
 class LoginForm extends Component
 {
-
-    state={email:'',password:'',error:'',loading:false};
+    state={email:'',password:'',error:''};
 
     static navigationOptions = {
-        title: 'Welcome',
+        title: 'Back',
     };
     onButtonClick(){
         fetch("http://localhost:3000/user",{
@@ -112,6 +112,12 @@ class LoginForm extends Component
     }
 
 };
+
+const mapStateToProps=state=>{
+    return{
+        userDetail:state.LoginUser.userDetail
+    }
+}
 const styles ={
     bgImageStyle:{
         height:responsiveHeight(100),
@@ -206,5 +212,4 @@ const styles ={
 
 };
 
-
-export default LoginForm;
+export default connect(mapStateToProps,{})(LoginForm);
