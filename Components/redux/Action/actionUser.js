@@ -1,4 +1,4 @@
-import {USER_REG} from './actionType'
+import {USER_REG,USER_LOGIN} from './actionType'
 import constant from '../../../apiCall/apiConst'
 import {apiCall} from '../../../apiCall/apiCall'
 
@@ -27,5 +27,24 @@ export const UserReg=(Name,email,password,UserId)=>{
 
 
 export const UserLogIn=(email,password)=>{
+
+    return(dispatch,getState)=>{
+
+        return apiCall(constant.BASE_URL+constant.LOGIN,'post',{
+            email:email,
+            password:password
+        },{}).then((doc)=>{
+            console.log(doc);
+            dispatch({
+                type:USER_LOGIN,
+                payload:doc.data.token1,
+                status:doc.status,
+                data:doc.data
+            })
+        }).catch((err)=>{
+            console.log(err);
+        })
+    }
+
 
 }

@@ -16,7 +16,7 @@ class Registration extends Component
     };
     onButtonClick(){
 
-        if(this.state.Name===''&& this.state.email===''&&this.state.password===''&&this.state.UserId==='')
+        if(this.state.Name===''&& this.state.email===''&& this.state.password===''&& this.state.UserId==='')
         {
             alert("Please fill the details");
         }
@@ -98,7 +98,7 @@ class Registration extends Component
 const mapStateToProps=state=>
 {
     return{
-        user:state.RegUser.user
+        user:state.User.user
     }
 };
 

@@ -4,6 +4,7 @@ import {apiCall} from "../../../apiCall/apiCall";
 
 export const getMovie=(props)=>{
 
+
     //console.log(props)
     return(dispatch,getState)=>{
         return apiCall(constant.BASE_URL+constant.MOVIE,'get',{},{}).then((response)=>{

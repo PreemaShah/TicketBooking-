@@ -2,42 +2,54 @@ import React,{Component} from 'react';
 import {Text,View,ImageBackground,Image,Alert,TouchableOpacity,Linking,AsyncStorage} from 'react-native';
 import {Card,CardItem,Header,Input,Button} from "../Components/Common";
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
+import {UserLogIn} from '../Components/redux/Action/actionUser'
 import {connect} from 'react-redux';
 class LoginForm extends Component
 {
-    state={email:'',password:'',error:''};
+    state={email:'preema@gmail.com',password:'123',error:''};
 
     static navigationOptions = {
         title: 'Back',
     };
-    onButtonClick(){
-        fetch("http://localhost:3000/user",{
-            method:'POST',
-            headers:{
-                'Accept':'application/json',
-                'Content-Type':'application/json'
-            },
-            body:JSON.stringify({
-                email:this.state.email,
-                password:this.state.password
-            })
-        }).then((response)=>response.json()).then((responseJson)=>{
-           var token=JSON.stringify(responseJson);
-           AsyncStorage.setItem('userToken',token);
-           var succ=JSON.stringify("failed");
-           if(token===succ)
-           {
-               Alert.alert('Please enter correct details');
-           }
-           else{
-               console.log(token);
-               var { navigate } = this.props.navigation;
-               navigate('Home')
+    componentWillReceiveProps(nextprops)
+    {
+        console.log(nextprops.token);
+        if(nextprops.status===200)
+        {
 
-           }
-        }).catch((error)=>{
-            console.error(error);
-        });
+            AsyncStorage.setItem('userToken',nextprops.token);
+           /* const value =  AsyncStorage.getItem('userToken').then((data)=>{
+                console.log(data);
+            }).catch((err)=>{
+                console.log(err)
+                });
+            console.log("asynch storage");
+            console.log(value);*/
+            var { navigate } = this.props.navigation;
+            navigate('Home');
+            Alert.alert("user logged in");
+        }
+        else
+        {
+            Alert.alert('Please enter correct details');
+
+        }
+
+    }
+
+
+    onButtonClick(){
+
+        if(this.state.email==='' && this.state.password==='')
+        {
+            alert("Please fill the details");
+        }
+        else
+        {
+
+            this.props.UserLogIn(this.state.email,this.state.password)
+        }
+
     }
 
     render()
@@ -115,7 +127,8 @@ class LoginForm extends Component
 
 const mapStateToProps=state=>{
     return{
-        userDetail:state.LoginUser.userDetail
+        token:state.User.token,
+        status:state.User.status
     }
 }
 const styles ={
@@ -212,4 +225,4 @@ const styles ={
 
 };
 
-export default connect(mapStateToProps,{})(LoginForm);
+export default connect(mapStateToProps,{UserLogIn})(LoginForm);
