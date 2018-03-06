@@ -11,7 +11,7 @@ class theatre extends Component {
         return(
             <View>
                 <Text>
-                    {this.props.navigation.state.params.value}
+                    {this.props.navigation.state.params.itemValue}
                 </Text>
             </View>
         )

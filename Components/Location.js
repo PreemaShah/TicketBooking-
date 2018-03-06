@@ -9,38 +9,34 @@ class Location extends Component
     constructor(props)
     {
         super(props)
-        this.state={cities:[]}
+        this.state={cities:[],selectedCity:''}
     }
 
-    componentWillMount()
-    {
-        this.props.getCity();
 
-    }
     componentDidMount(){
-        console.log(this.props.city.data);
+        this.props.getCity();
     }
-
-   /* renderCity=()=>
-    {
-
-        console.log("in rendercity");
-        return(
-            this.props.city.map((data,key)=>{
-                console.log(data);
-                this.state.cities.push(data)
-
-            })
-        )
-    }*/
 
     render()
     {
         return(
             <View>
-              {/*  <Picker onValueChange={(itemValue, itemIndex) => console.log(itemValue)}>
-                    <Picker.Item label={this.props.city} value={this.props.city._id}/>
-                </Picker>*/}
+
+                <Picker selectedValue={this.state.selectedCity}
+                        onValueChange={(itemValue, itemIndex) => {this.setState({selectedCity:itemValue})
+                                                                    this.props.navigation.navigate('Theatre',{itemValue})
+                        }}>
+                    <Picker.Item label='select city'/>
+                    {
+                        this.props.city.map((value,key)=>{
+                            return(
+                                <Picker.Item label={value.city} value={value._id} key={value._id}/>
+                            )
+                        })
+                    }
+
+                </Picker>
+
             </View>
 
         )

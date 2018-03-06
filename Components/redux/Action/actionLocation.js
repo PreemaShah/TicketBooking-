@@ -7,7 +7,7 @@ export const getCity = ()=>{
     return (dispatch,getState)=>{
 
         return apiCall( constant.BASE_URL + constant.CITY,'get').then((response)=>{
-            console.log(response);
+            //console.log(response);
 
             dispatch({
                 type:GET_CITY,
