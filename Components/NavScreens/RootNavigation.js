@@ -1,5 +1,6 @@
 import {StackNavigator,DrawerNavigator} from 'react-navigation';
-import React,{Component} from 'react'
+import React,{Component} from 'react';
+import {View,Text} from 'react-native'
 import MyTab from '../TAB';
 import userProfile from '../userProfile'
 import LoginForm from '../LoginForm'
@@ -9,9 +10,9 @@ import Booking from '../Booking'
 import Location from '../Location'
 import logOut from '../logOut'
 import theatre from '../theatre'
-
-
-
+import navScreen from '../NavScreens/NavScreen'
+import SkipNavScreen from'../NavScreens/SkipNavScreen'
+import ReleasedMovie from '../releasedMovie'
 const RootNavigation=StackNavigator({
 
         Start:{
@@ -25,7 +26,7 @@ const RootNavigation=StackNavigator({
         },
 
         Home:{
-            screen:UserAppDrawer,
+            screen:global.home?navScreen:SkipNavScreen,
         },
 
         Registration:{
@@ -39,6 +40,9 @@ const RootNavigation=StackNavigator({
         },
         Location:{
             screen:Location
+        },
+        ReleasedMovie: {
+            screen:ReleasedMovie
         }
     },
     {

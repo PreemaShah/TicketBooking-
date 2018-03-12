@@ -4,13 +4,9 @@ import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-nat
 import React,{Component} from 'react'
 import MyTab from '../TAB';
 import userProfile from '../userProfile'
-import LoginForm from '../LoginForm'
-import Register from '../Registration'
-import StartPage from '../StartPage'
-import Booking from '../Booking'
 import Location from '../Location'
 import logOut from '../logOut'
-import theatre from '../theatre'
+
 
 
 

@@ -1,8 +1,9 @@
-import {GET_DATA} from "../Action/actionType";
+import {GET_DATA,GET_RELEASEDMOVIE} from "../Action/actionType";
 
 const INITIAL_STATE ={
     movie:[],
-    page:''
+    page:'',
+    releasedMovie:[]
 };
 
 export default (state=INITIAL_STATE,action)=>{
@@ -14,6 +15,13 @@ export default (state=INITIAL_STATE,action)=>{
             return{
                 ...state,
                 movie:action.payload
+            }
+        }
+        case GET_RELEASEDMOVIE:{
+
+            return{
+                ...state,
+                releasedMovie:action.payload
             }
         }
         default:{

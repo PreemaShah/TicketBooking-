@@ -1,44 +1,24 @@
 import React,{Component} from 'react';
 import {Text,View,AsyncStorage} from 'react-native';
-
-
-class CheckSignIn extends Component{
-
-
-
-    checkSignIn() {
-
+global.home=true;
+   export const checkSignIn=()=> {
 
         return AsyncStorage.getItem('userToken').then((token)=>{
             console.log(token);
             if(!token)
             {
-                return Promise.resolve(false);
+
+                 global.home=false;
+                console.log(global.home);
             }
             else {
-                return  Promise.resolve(true);
+
+                 global.home=true;
+                console.log(global.home)
             }
         }).catch((err)=>{
-            return  Promise.reject(err)
+           console.log(err)
         })
-    }
-
-    render(){
-
-        return(
-            <View>
-                {(true)?
-                <WithoutProfile/>:<Profile/>}
-            </View>
-        )
-    }
-}
-
-export default CheckSignIn;
-
-
-
-
-
+};
 
 

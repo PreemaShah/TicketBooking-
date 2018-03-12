@@ -6,6 +6,7 @@ export function apiCall(url,type='get',data={},header={}) {
     {
 
         return axios.get(url,{header:reqheader}).then((response)=>{
+
             return Promise.resolve(response);
 
         }).catch((err)=>{

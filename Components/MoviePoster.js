@@ -8,7 +8,7 @@ import {DefaultStylr,Card,CardItem} from "../Components/Common";
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 let { width, height } = Dimensions.get('window');
 const cols = 3, rows = 3;
-
+import {checkSignIn} from './CheckSignIn'
 class MoviePoster extends Component
 {
 
@@ -35,6 +35,7 @@ class MoviePoster extends Component
   {
       //getState.Movie.page=this.props.page
       this.props.getMovieAction(this.props);
+      checkSignIn();
 
   }
     shouldComponentUpdate(nextprops,nextstate)

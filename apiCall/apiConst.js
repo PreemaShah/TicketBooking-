@@ -5,5 +5,6 @@ module.exports={
      LOGIN:'user',
     CITY:'CityDetail',
     THEATRE:'selectTheatre',
-    LOGOUT:'deleteToken'
+    LOGOUT:'deleteToken',
+    MOVIERELEASED:'theatreMovie/getOne/'
 }

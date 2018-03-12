@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import {Text,View,ImageBackground,Image,Alert,TouchableOpacity,Linking,AsyncStorage} from 'react-native';
 import {Card,CardItem,Header,Input,Button} from "../Components/Common";
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
+import {checkSignIn} from './CheckSignIn'
 import {UserLogIn} from '../Components/redux/Action/actionUser'
 import {connect} from 'react-redux';
 class LoginForm extends Component
@@ -26,6 +27,8 @@ class LoginForm extends Component
             console.log(value);*/
             var { navigate } = this.props.navigation;
             navigate('Home');
+            checkSignIn();
+            // CheckSignIn();
             Alert.alert("user logged in");
         }
         else
@@ -47,6 +50,7 @@ class LoginForm extends Component
         {
 
             this.props.UserLogIn(this.state.email,this.state.password)
+
         }
 
     }

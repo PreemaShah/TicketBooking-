@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import {Text,View,ImageBackground,Image,Alert,TouchableOpacity} from 'react-native';
-import {Card,CardItem,Header,Input,Button,FlatList} from "../Components/Common";
+import {Card,CardItem,Header,Input,Button} from "../Components/Common";
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions'
 import {getTheatre} from './redux/Action/actionTheatre';
 import _ from 'lodash';
@@ -19,6 +19,12 @@ class theatre extends Component {
         console.log(this.props.thtr);
         return true
     }
+    ReleasedMovie(theatrename)
+    {
+        console.log("theater name");
+        console.log(theatrename);
+        this.props.navigation.navigate('ReleasedMovie',{theatrename})
+    }
     displayThtr=()=>
     {
         var arr1=this.props.thtr;
@@ -30,12 +36,15 @@ class theatre extends Component {
         );
         return(
            arr1.map((data,key)=>{
+               console.log(data)
                 return(
 
-                    <CardItem>
-                             <Text>{data.TheatreName}</Text>
+                    <TouchableOpacity key={data._id}  style={styles.button} onPress={()=>this.ReleasedMovie(data._id)}>
+                    <CardItem  >
+                             <Text style={styles.textStyle}>{data.TheatreName}</Text>
+                        <Text style={styles.textStyle}>{data._id}</Text>
                     </CardItem>
-                    
+                    </TouchableOpacity>
                     )
             })
         )
@@ -47,7 +56,7 @@ class theatre extends Component {
             <View>
                 <ImageBackground
                     style={styles.bgImageStyle}
-                    source={require('./../Image/Theatre.jpg')}
+                    source={require('./../Image/download.jpeg')}
                 >
                 {this.displayThtr()}
                 </ImageBackground>
@@ -82,6 +91,15 @@ const styles={
     cardItem:{
         border:1,
         borderColor:'white'
-    }
+    },
+    textStyle:{
+        color:'white',
+        fontSize:25
+    },
+    button: {
+        alignItems: 'center',
+        justifyContent:'space-between',
+        paddingTop: 10
+    },
 }
 export default connect(mapStateToProps,mapDispatchToProps)(theatre);
