@@ -13,11 +13,10 @@ class LoginForm extends Component
     };
     componentWillReceiveProps(nextprops)
     {
-        console.log(nextprops.token);
         if(nextprops.status===200)
         {
 
-            AsyncStorage.setItem('userToken',nextprops.token);
+            AsyncStorage.setItem("userToken",nextprops.data.headers['x-auth']);
            /* const value =  AsyncStorage.getItem('userToken').then((data)=>{
                 console.log(data);
             }).catch((err)=>{
@@ -127,8 +126,9 @@ class LoginForm extends Component
 
 const mapStateToProps=state=>{
     return{
-        token:state.User.token,
-        status:state.User.status
+        token1:state.User.token1,
+        status:state.User.status,
+        data:state.User.data
     }
 }
 const styles ={

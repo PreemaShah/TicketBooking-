@@ -56,7 +56,7 @@ class MoviePoster extends Component
                         <Text style={styles.title}  >{data.Title}</Text>
                         <Text style={styles.genre}>{data.Genre}</Text>
                         </View>
-                        <Button title="Book" onPress={()=>{this.props.navigation.navigate('Booking')}}></Button>
+                        <Button title="Book" onPress={()=>{this.props.navigation.navigate('Location')}}></Button>
                     </TouchableOpacity>
                 )
             })

@@ -3,10 +3,12 @@ import {Text, View} from 'react-native';
 import Home from './Home/Home'
 import MyApp from './Components/TAB'
 import LoginForm from './Components/LoginForm'
-import NavScreen from './Components/NavScreen'
+import NavScreen from './Components/NavScreens/NavScreen'
+import NavScreen1 from './Components/NavScreens/SkipNavScreen'
 import ImageResize from './FileUpload/ImageResize'
 import StartPage from './Components/StartPage'
 import Reg from './Components/Registration'
+import RootNavigation from './Components/NavScreens/RootNavigation'
 import {createStore,applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import appReducer from './Components/redux/Reducer'
@@ -19,10 +21,8 @@ class App extends Component
         return(
 
             <Provider store={(createStore(appReducer,applyMiddleware(thunk)))}>
-                <NavScreen/>
+                <RootNavigation/>
             </Provider>
-
-
 
         )
     }

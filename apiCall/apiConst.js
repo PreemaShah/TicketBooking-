@@ -2,6 +2,8 @@ module.exports={
     BASE_URL:'http://localhost:3000/',
     MOVIE:'Movie',
     USERS:'users',
-    LOGIN:'user',
-    CITY:'CityDetail'
+     LOGIN:'user',
+    CITY:'CityDetail',
+    THEATRE:'selectTheatre',
+    LOGOUT:'deleteToken'
 }

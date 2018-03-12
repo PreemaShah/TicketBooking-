@@ -1,32 +1,24 @@
 import React,{Component} from 'react';
-import {Text,View,AsyncStorage} from 'react-native';
-import axios from 'axios';
-import StartPage from './StartPage'
-import {NavigationActions} from 'react-navigation'
+import {Text,View,AsyncStorage,Alert} from 'react-native';
+import StartPage from './StartPage';
+import {UserLogOut} from './redux/Action/actionUser'
+import {connect} from 'react-redux';
+import {NavigationActions} from 'react-navigation';
 class logOut extends Component
 {
     constructor(props)
     {
-        super(props)
-    }
-    async deleteToken(Token)
-    {
-        try{
+        super(props);
 
-            var tok= await AsyncStorage.removeItem(Token);
-            console.log(tok);
-            return tok;
-        }
-        catch(error){
-            console.log(error);
-        }
     }
-    onLogout()
+
+    componentWillReceiveProps(nextprops)
     {
-        axios.put('http://localhost:3000/deleteToken').then((response)=>{
-            if(response.data=='1')
-            {
-                this.deleteToken('userToken');
+
+        console.log(nextprops);
+        if(nextprops.status1===200)
+        {
+            AsyncStorage.removeItem("userToken").then((success)=>{
                 this.props.navigation.dispatch(NavigationActions.reset({
                     index:0,
                     actions:[
@@ -35,15 +27,25 @@ class logOut extends Component
                         })
                     ]
                 }))
-            }
-            else{
-                alert("Logout Failed :"+response.data);
-            }
+                Alert.alert("successfully logout");
+            }).catch((err)=>{
+                console.log(err);
+            })
+        }else
+        {
+            alert("error in logout")
+        }
 
-        }).catch((err)=>{
-            console.log(err)
-        })
     }
+
+    onLogout()
+    {
+        console.log("In Logout");
+
+        this.props.UserLogOut();
+        console.log(this.props)
+    }
+
     render()
     {
         return(
@@ -54,4 +56,13 @@ class logOut extends Component
     }
 
 }
-export default logOut;
+const mapStateToProps=state=>{
+    return{
+        status1:state.User.status1
+    }
+
+};
+
+export default connect(mapStateToProps,{
+    UserLogOut
+})(logOut);

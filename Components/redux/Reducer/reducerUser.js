@@ -1,8 +1,9 @@
-import {USER_REG,USER_LOGIN} from '../Action/actionType';
+import {USER_REG,USER_LOGIN,LOG_OUT} from '../Action/actionType';
 const INITIAL_STATE={
     user:{},
-    token:'',
+    token1:'',
     status:0,
+    status1:0,
     data:{}
 }
 export default(state=INITIAL_STATE,action)=>{
@@ -19,10 +20,18 @@ export default(state=INITIAL_STATE,action)=>{
         {
             return{
                 ...state,
-                token:action.payload,
+                token1:action.payload,
                 status:action.status,
                 data:action.data
 
+            }
+        }
+        case LOG_OUT:
+        {
+
+            return{
+                ...state,
+                status1:action.payload
             }
         }
         default:{

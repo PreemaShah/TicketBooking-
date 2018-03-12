@@ -6,7 +6,6 @@ export function apiCall(url,type='get',data={},header={}) {
     {
 
         return axios.get(url,{header:reqheader}).then((response)=>{
-
             return Promise.resolve(response);
 
         }).catch((err)=>{
@@ -31,6 +30,23 @@ export function apiCall(url,type='get',data={},header={}) {
             return err;
         })
     }
+
+    else if(type=='put')
+    {
+
+
+        return axios.put(url,data,{header:reqheader}).then((response)=>{
+
+            return Promise.resolve(response)
+        }).catch((err)=>{
+            if(err.response!=undefined)
+            {
+                return err.response;
+            }
+            return err;
+        })
+    }
+
 
 
 }
