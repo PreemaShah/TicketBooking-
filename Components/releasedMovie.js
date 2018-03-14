@@ -21,8 +21,12 @@ class releasedMovie extends Component
     }
 
     openModal(data) {
+        console.log(data);
         this.setState({modalVisible:true,selectedMovie:data});
     }
+    static navigationOptions = {
+        title: 'Released Movie',
+    };
 
     closeModal() {
         this.setState({modalVisible:false});
@@ -37,11 +41,11 @@ class releasedMovie extends Component
     }
     shouldComponentUpdate(nextprops,nextstate)
     {
+        console.log(nextprops);
         return true
     }
 
     renderItems = () => {
-
         return (
             this.props.releasedMovie.map((data,key)=>{
                 console.log(data.MovieId.Title);
@@ -51,10 +55,10 @@ class releasedMovie extends Component
                             <Image source={{uri:data.MovieId.Poster}} style={styles.imageStyle} />
                         </View>
                         <View style={{height:responsiveHeight(8),width:responsiveWidth(25)}}>
-                            <Text style={styles.title}  >{data.MovieId.Title}</Text>
+                            <Text style={styles.title}>{data.MovieId.Title}</Text>
                             <Text style={styles.genre}>{data.MovieId.Genre}</Text>
                         </View>
-                        <Button title="Show" onPress={()=>{this.props.navigation.navigate('Location')}}></Button>
+                            <Button title="Book" onPress={()=>{this.props.navigation.navigate('Booking')}}></Button>
                     </TouchableOpacity>
                 )
             })
@@ -63,21 +67,22 @@ class releasedMovie extends Component
 
 
     renderMovieDetails=(data)=>{
-        console.log(data)
+        console.log(data.MovieId);
 
         return(
+
             <View style={styles.ModalView}>
                 <View style={styles.container}>
-                    <Image source={{uri:data.Poster}} style={styles.imageStyle} />
+                    <Image source={{uri:data.MovieId.Poster}} style={styles.imageStyle} />
                 </View>
                 <View>
-                    <Text style={[styles.MTextcontainer,{color:'blue'}]} numberOfLines={1}>{data.Title}</Text>
-                    <Text style={[styles.MTextcontainer,{color:'blue'}]}>{data.Genre}</Text>
-                    <Text style={styles.MTextcontainer}>Leading Actor: <Text style={{color:'blue'}} numberOfLines={1}>{data.LeadingActorMale}</Text></Text>
-                    <Text style={styles.MTextcontainer}>Leading Actress:<Text style={{color:'blue'}} numberOfLines={1}>{data.LeadingActorFemale}</Text></Text>
-                    <Text style={styles.MTextcontainer}>Duration:<Text style={{color:'blue'}} numberOfLines={1}>{data.Duration} hrs</Text></Text>
-                    <Text style={styles.MTextcontainer}>Ratings:<Text style={{color:'blue'}} numberOfLines={1}>{data.Ratings}/10</Text></Text>
-                    <Text style={styles.MTextcontainer}>Description:<Text style={{color:'blue'}} numberOfLines={10}>{data.Description}</Text></Text>
+                    <Text style={[styles.MTextcontainer,{color:'blue'}]} numberOfLines={1}>{data.MovieId.Title}</Text>
+                    <Text style={[styles.MTextcontainer,{color:'blue'}]}>{data.MovieId.Genre}</Text>
+                    <Text style={styles.MTextcontainer}>Leading Actor: <Text style={{color:'blue'}} numberOfLines={1}>{data.MovieId.LeadingActorMale}</Text></Text>
+                    <Text style={styles.MTextcontainer}>Leading Actress:<Text style={{color:'blue'}} numberOfLines={1}>{data.MovieId.LeadingActorFemale}</Text></Text>
+                    <Text style={styles.MTextcontainer}>Duration:<Text style={{color:'blue'}} numberOfLines={1}>{data.MovieId.Duration} hrs</Text></Text>
+                    <Text style={styles.MTextcontainer}>Ratings:<Text style={{color:'blue'}} numberOfLines={1}>{data.MovieId.Ratings}/10</Text></Text>
+                    <Text style={styles.MTextcontainer}>Description:<Text style={{color:'blue'}} numberOfLines={10}>{data.MovieId.Description}</Text></Text>
                 </View>
             </View>
         )
@@ -97,21 +102,24 @@ class releasedMovie extends Component
                     visible={this.state.modalVisible}
                     animationType={'slide'}
                     style={{height:100,backgroundColor:'black'}}
-                    onRequestClose={() => this.closeModal()}
-                >
+                    onRequestClose={() => this.closeModal()}>
                     <View style={styles.modalContainer}>
-                        {this.renderMovieDetails(this.state.selectedMovie)}
+
+                        {
+                            (this.state.modalVisible===true)?this.renderMovieDetails(this.state.selectedMovie):console.log("modal not called")
+
+
+                        }
                     </View>
                     <View style={styles.ModalButton}>
                         <Button
                             onPress={() => this.closeModal()}
                             title="X"
 
-                        >
-                        </Button>
-
+                        />
                     </View>
                 </Modal>
+
 
             </View>
 

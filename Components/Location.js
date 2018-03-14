@@ -12,7 +12,9 @@ class Location extends Component
         this.state={cities:[],selectedCity:''}
     }
 
-
+    static navigationOptions = {
+        title: 'Location',
+    };
     componentDidMount(){
         this.props.getCity();
     }

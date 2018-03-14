@@ -52,15 +52,17 @@ export const UserLogIn=(email,password)=>{
 export const UserLogOut=()=>{
     return(dispatch,getState)=> {
 
+        
         return AsyncStorage.getItem('userToken').then((token) => {
-
+            debugger
             if(!token)
             {
                 token="";
             }
-            return apiCall(constant.BASE_URL+constant.LOGOUT,'put',{},{'x-auth':token}).then((response)=>{
-                console.log(response.status);
+            return apiCall(constant.BASE_URL+constant.LOGOUT+'/'+token,'put',{},{'x-auth':token}).then((response)=>{
 
+                console.log(response.status);
+                
                 dispatch({
                     type:LOG_OUT,
                     payload:response.status

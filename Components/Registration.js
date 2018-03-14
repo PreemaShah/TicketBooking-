@@ -12,7 +12,7 @@ class Registration extends Component
     state={email:'',password:'',error:'',Name:'',UserId:''};
 
     static navigationOptions = {
-        title: 'Welcome',
+        title: 'Movie Ticket Booking',
     };
     onButtonClick(){
 
@@ -26,6 +26,7 @@ class Registration extends Component
             this.props.UserReg(this.state.Name,this.state.email,this.state.password,this.state.UserId).then((response)=>{
                 console.log(this.props.user);
                 Alert.alert("user created");
+                this.props.navigation.navigate('Login')
             }).catch((err)=>{
                 console.log(err);
             })

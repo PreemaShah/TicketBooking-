@@ -10,7 +10,7 @@ class LoginForm extends Component
     state={email:'preema@gmail.com',password:'123',error:''};
 
     static navigationOptions = {
-        title: 'Back',
+        title: 'Movie Ticket Booking',
     };
     componentWillReceiveProps(nextprops)
     {
@@ -27,8 +27,6 @@ class LoginForm extends Component
             console.log(value);*/
             var { navigate } = this.props.navigation;
             navigate('Home');
-            checkSignIn();
-            // CheckSignIn();
             Alert.alert("user logged in");
         }
         else
@@ -96,23 +94,21 @@ class LoginForm extends Component
                             </CardItem>
                         </Card>
 
-
-
                             <Card style={styles.containerStyleImg}>
                             <CardItem style={styles. IconcardItemStyle}>
-                        <Image source={{uri:'/Users/lanet/Desktop/ReactNative/Examples/TicketBooking/Image/facebook-logo-button.png'}}
+                        <Image source={require('./../Image/facebook-logo-button.png')}
                                resizeMode={'contain'}
                                style={{height:responsiveHeight(10),width:responsiveWidth(20)}}
                         />
                                 <TouchableOpacity onPress={()=>{Linking.openURL('http://localhost:3000/github')}}>
-                                <Image source={{uri:'/Users/lanet/Desktop/ReactNative/Examples/TicketBooking/Image/github-logo.png'}}
+                                <Image source={require('./../Image/google-plus-logo-button.png')}
                                        resizeMode={'contain'}
                                        style={{height:responsiveHeight(10),width:responsiveWidth(20)}}
                                 />
                                 </TouchableOpacity>
 
                                 <TouchableOpacity onPress={()=>{Linking.openURL('http://localhost:3000/auth/google')}}>
-                                    <Image source={{uri:'/Users/lanet/Desktop/ReactNative/Examples/TicketBooking/Image/google-plus-logo-button.png'}}
+                                    <Image source={require('./../Image/github-logo.png')}
                                            resizeMode={'contain'}
                                            style={{height:responsiveHeight(10),width:responsiveWidth(20)}}
                                     />
@@ -206,6 +202,7 @@ const styles ={
         padding:5,
         flexDirection:'row',
         borderColor:'#121212',
+        backgroundColor:'000'
     },
     ButtonStyle:{
         alignSelf:'stretch',

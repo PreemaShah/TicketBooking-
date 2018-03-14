@@ -9,6 +9,9 @@ class theatre extends Component {
     constructor(props) {
         super(props)
     }
+    static navigationOptions = {
+        title: 'Theaters',
+    };
     componentDidMount()
     {
         console.log(this.props.navigation.state.params.itemValue);
@@ -36,13 +39,12 @@ class theatre extends Component {
         );
         return(
            arr1.map((data,key)=>{
-               console.log(data)
+               console.log(data);
                 return(
 
                     <TouchableOpacity key={data._id}  style={styles.button} onPress={()=>this.ReleasedMovie(data._id)}>
                     <CardItem  >
                              <Text style={styles.textStyle}>{data.TheatreName}</Text>
-                        <Text style={styles.textStyle}>{data._id}</Text>
                     </CardItem>
                     </TouchableOpacity>
                     )

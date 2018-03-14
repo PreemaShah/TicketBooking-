@@ -14,8 +14,7 @@ class logOut extends Component
 
     componentWillReceiveProps(nextprops)
     {
-
-        console.log(nextprops);
+        console.log(nextprops.status1);
         if(nextprops.status1===200)
         {
             AsyncStorage.removeItem("userToken").then((success)=>{
@@ -26,9 +25,10 @@ class logOut extends Component
                             routeName:'Start'
                         })
                     ]
-                }))
+                }));
                 Alert.alert("successfully logout");
             }).catch((err)=>{
+
                 console.log(err);
             })
         }else
@@ -46,11 +46,16 @@ class logOut extends Component
         console.log(this.props)
     }
 
+    componentDidMount()
+    {
+        this.onLogout()
+    }
+
     render()
     {
         return(
             <View>
-                {this.onLogout()}
+
             </View>
         )
     }

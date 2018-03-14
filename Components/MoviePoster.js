@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {Text,View,Dimensions,Image,ScrollView,TouchableOpacity,Modal,Button,StyleSheet} from 'react-native';
+import {Text,View,Dimensions,Image,ScrollView,TouchableOpacity,Modal,Button,StyleSheet,Animated,Easing} from 'react-native';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -18,9 +18,13 @@ class MoviePoster extends Component
         this.state={
             modalVisible:false,
             loading:false,
-            selectedMovie:''
+            selectedMovie:'',
+            fadeIn:new Animated.Value(0)
         };
     }
+    static navigationOptions = {
+        title: 'Movie Ticket Booking',
+    };
 
     openModal(data) {
         this.setState({modalVisible:true,selectedMovie:data});
@@ -35,7 +39,12 @@ class MoviePoster extends Component
   {
       //getState.Movie.page=this.props.page
       this.props.getMovieAction(this.props);
-      checkSignIn();
+      //checkSignIn();
+      Animated.timing(this.state.fadeIn,{
+          toValue:1,
+          //easing:Easing.out(Easing.quad),
+          duration:10000
+      }).start();
 
   }
     shouldComponentUpdate(nextprops,nextstate)
@@ -66,7 +75,6 @@ class MoviePoster extends Component
 
 
     renderMovieDetails=(data)=>{
-
                 return(
                     <View style={styles.ModalView}>
                         <View style={styles.container}>
@@ -97,13 +105,13 @@ class MoviePoster extends Component
                     }
                     <Modal
                         visible={this.state.modalVisible}
-                        animationType={'slide'}
                         style={{height:100,backgroundColor:'black'}}
                         onRequestClose={() => this.closeModal()}
                     >
-                        <View style={styles.modalContainer}>
+
+                        <Animated.View style={[styles.modalContainer,{opacity:this.state.fadeIn}]}>
                                 {this.renderMovieDetails(this.state.selectedMovie)}
-                        </View>
+
                         <View style={styles.ModalButton}>
                             <Button
                                 onPress={() => this.closeModal()}
@@ -113,6 +121,7 @@ class MoviePoster extends Component
                             </Button>
 
                         </View>
+                        </Animated.View>
                     </Modal>
 
                 </View>
@@ -156,12 +165,14 @@ const styles = {
         ...StyleSheet.absoluteFillObject,
     },
     title:{
+        marginLeft:10,
         ...DefaultStylr.text,
         fontSize:responsiveFontSize(1.6),
     },
     genre:{
         ...DefaultStylr.text,
         color:'#636363',
+        marginLeft:10,
         fontSize:responsiveFontSize(1.3),
        // paddingTop:5
 
@@ -183,8 +194,10 @@ const styles = {
     },
     modalContainer: {
         justifyContent: 'center',
-        flex: 1,
-
+        backgroundColor:'grey',
+        height:responsiveHeight(50),
+        marginRight:responsiveWidth(10),
+        marginLeft:responsiveWidth(10)
 
     },
     MTextcontainer: {
