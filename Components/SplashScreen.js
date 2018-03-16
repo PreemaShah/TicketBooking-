@@ -1,10 +1,9 @@
 import React,{Component} from 'react';
-import {Text, View, ImageBackground, Image, AsyncStorage} from 'react-native';
-import {Button,CardItem,Card} from './Common';
+import {Text, View, ImageBackground, Image, AsyncStorage,Animated,Easing} from 'react-native';
+import {Button,CardItem,Card,ProgressBar} from './Common';
 import {NavigationActions} from 'react-navigation';
 import NavScreen from '../Components/NavScreens/NavScreen'
-import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
-
+import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions'
 class SplashScreen extends Component
 {
 
@@ -48,8 +47,11 @@ class SplashScreen extends Component
                             <Image source={require('./../Image/m_logo.png')}
                                    style={styles.ImageStyle}
                             />
+                            <ProgressBar/>
                         </View>
+
                     </View>
+
                 </ImageBackground>
             </View>
         )
@@ -59,9 +61,10 @@ const styles = {
     bgImageStyle: {
         height: '100%',
         width: '100%',
+        justifyContent:'center'
     },
     mainViewStyle:{
-        justifyContent:'flex-start',
+        justifyContent:'center',
         height:'100%'
     },
     imageViewStyle:{
@@ -74,8 +77,6 @@ const styles = {
     ImageStyle:{
         width:responsiveWidth(50),
         height:responsiveHeight(30),
-        //alignSelf:'center',
-        //borderWidth: 4
 
     },
 

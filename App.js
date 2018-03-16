@@ -5,7 +5,6 @@ import MyApp from './Components/TAB'
 import LoginForm from './Components/LoginForm'
 import NavScreen from './Components/NavScreens/NavScreen'
 import ImageResize from './FileUpload/ImageResize'
-import StartPage from './Components/StartPage'
 import Reg from './Components/Registration'
 import SplashScreen from './Components/SplashScreen'
 import {createStore,applyMiddleware} from 'redux';

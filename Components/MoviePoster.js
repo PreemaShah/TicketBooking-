@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {Text,View,Dimensions,Image,ScrollView,TouchableOpacity,Modal,Button,StyleSheet,Animated,Easing} from 'react-native';
+import {Text,View,Dimensions,Image,ScrollView,TouchableOpacity,Modal,Button,StyleSheet,Animated,Easing,Alert} from 'react-native';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -28,23 +28,26 @@ class MoviePoster extends Component
 
     openModal(data) {
         this.setState({modalVisible:true,selectedMovie:data});
+        Animated.timing(this.state.fadeIn,{
+            toValue:1,
+            //easing:Easing.out(Easing.quad),
+            duration:1000
+        }).start();
     }
 
     closeModal() {
-        this.setState({modalVisible:false});
+        this.setState({modalVisible:false,fadeIn: new Animated.Value(0)});
 
     }
 
   componentDidMount()
   {
+      //alert("component did mount called")
+   //   console.log("hie");
       //getState.Movie.page=this.props.page
       this.props.getMovieAction(this.props);
       //checkSignIn();
-      Animated.timing(this.state.fadeIn,{
-          toValue:1,
-          //easing:Easing.out(Easing.quad),
-          duration:10000
-      }).start();
+
 
   }
     shouldComponentUpdate(nextprops,nextstate)
@@ -72,27 +75,49 @@ class MoviePoster extends Component
             })
         )
     };
-
-
     renderMovieDetails=(data)=>{
                 return(
                     <View style={styles.ModalView}>
                         <View style={styles.container}>
                             <Image source={{uri:data.Poster}} style={styles.imageStyle} />
                         </View>
-                        <View>
-                             <Text style={[styles.MTextcontainer,{color:'blue'}]} numberOfLines={1}>{data.Title}</Text>
+                        <View style={{alignItems:'flex-start'}}>
+
+                            <View style={{flexDirection:'row'}}>
+                             <Text style={[styles.MTextcontainer,{color:'blue'}]}>{data.Title}</Text>
+                            </View>
+
+                            <View style={{flexDirection:'row'}}>
                             <Text style={[styles.MTextcontainer,{color:'blue'}]}>{data.Genre}</Text>
-                            <Text style={styles.MTextcontainer}>Leading Actor: <Text style={{color:'blue'}} numberOfLines={1}>{data.LeadingActorMale}</Text></Text>
-                            <Text style={styles.MTextcontainer}>Leading Actress:<Text style={{color:'blue'}} numberOfLines={1}>{data.LeadingActorFemale}</Text></Text>
-                            <Text style={styles.MTextcontainer}>Duration:<Text style={{color:'blue'}} numberOfLines={1}>{data.Duration} hrs</Text></Text>
-                            <Text style={styles.MTextcontainer}>Ratings:<Text style={{color:'blue'}} numberOfLines={1}>{data.Ratings}/10</Text></Text>
-                            <Text style={styles.MTextcontainer}>Description:<Text style={{color:'blue'}} numberOfLines={10}>{data.Description}</Text></Text>
+                            </View>
+
+                            <View style={{flexDirection:'row'}}>
+                                <Text style={styles.MTextcontainer}>Leading Actor:</Text>
+                                <Text style={[styles.MTextcontainer,{color:'blue'}]}>{data.LeadingActorMale}</Text>
+                            </View>
+
+                            <View style={{flexDirection:'row'}}>
+                            <Text style={styles.MTextcontainer}>Leading Actress:<Text style={{color:'blue'}} >{data.LeadingActorFemale}</Text></Text>
+                            </View>
+
+                            <View style={{flexDirection:'row'}}>
+                            <Text style={styles.MTextcontainer}>Duration:<Text style={{color:'blue'}} >{data.Duration} hrs</Text></Text>
+                            </View>
+
+                            <View style={{flexDirection:'row'}}>
+                            <Text style={styles.MTextcontainer}>Ratings:<Text style={{color:'blue'}} >{data.Ratings}/10</Text></Text>
+                            </View>
+
+                            <View style={{height:responsiveHeight(2),width:responsiveWidth(50)}}>
+                            <Text style={styles.MTextcontainer}>Description:
+                                <Text style={{color:'blue'}}>{data.Description}</Text></Text>
+                            </View>
                         </View>
                     </View>
                 )
 
     }
+
     render()
     {
         return(
@@ -103,29 +128,37 @@ class MoviePoster extends Component
                         //this.mapping()
                        this.renderItems()
                     }
+
                     <Modal
                         visible={this.state.modalVisible}
-                        style={{height:100,backgroundColor:'black'}}
+                        animationType="slide"
                         onRequestClose={() => this.closeModal()}
                     >
 
-                        <Animated.View style={[styles.modalContainer,{opacity:this.state.fadeIn}]}>
-                                {this.renderMovieDetails(this.state.selectedMovie)}
 
-                        <View style={styles.ModalButton}>
+                        <View style={{alignItems:'center',height:height,marginRight:responsiveWidth(10),
+                            marginLeft:responsiveWidth(10),justifyContent:'center'}}>
+                            <TouchableOpacity onPress={()=>this.closeModal()}>
+                                <Animated.View style={[styles.modalContainer,{opacity:this.state.fadeIn}]}>
+                                    {this.renderMovieDetails(this.state.selectedMovie)}
+                                </Animated.View>
+                            </TouchableOpacity>
+
+                      {/*  <View style={styles.ModalButton}>
                             <Button
                                 onPress={() => this.closeModal()}
                                 title="X"
 
                             >
+
                             </Button>
 
+                        </View>*/}
                         </View>
-                        </Animated.View>
+
                     </Modal>
 
-                </View>
-
+                    </View>
 
         )
     }
@@ -184,7 +217,7 @@ const styles = {
             flexWrap:'wrap',
     },
     ModalView:{
-        flexDirection:'row'
+        flexDirection:'row',
 
     },
     ModalStyle:{
@@ -196,15 +229,17 @@ const styles = {
         justifyContent: 'center',
         backgroundColor:'grey',
         height:responsiveHeight(50),
+        minWidth:responsiveWidth(90),
+        maxWidth:responsiveWidth(90),
         marginRight:responsiveWidth(10),
-        marginLeft:responsiveWidth(10)
+        marginLeft:responsiveWidth(10),
+        borderRadius:20
 
     },
     MTextcontainer: {
         ...DefaultStylr.text,
-        fontSize:responsiveFontSize(1.5),
+        fontSize:responsiveFontSize(1.8),
         paddingLeft:5,
-        marginRight:responsiveWidth(35)
     },
     ModalButton:{
         justifyContent: 'flex-end'

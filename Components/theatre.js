@@ -1,9 +1,8 @@
 import React,{Component} from 'react';
-import {Text,View,ImageBackground,Image,Alert,TouchableOpacity} from 'react-native';
+import {Text,View,ImageBackground,Alert,TouchableOpacity,Image} from 'react-native';
 import {Card,CardItem,Header,Input,Button} from "../Components/Common";
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions'
 import {getTheatre} from './redux/Action/actionTheatre';
-import _ from 'lodash';
 import {connect} from 'react-redux'
 class theatre extends Component {
     constructor(props) {
@@ -28,24 +27,37 @@ class theatre extends Component {
         console.log(theatrename);
         this.props.navigation.navigate('ReleasedMovie',{theatrename})
     }
+
     displayThtr=()=>
     {
         var arr1=this.props.thtr;
-        arr1.sort(function (a,b)
+        console.log("arr1");
+        console.log(arr1);
+        //alert(arr1)
+        var SortArr = arr1.slice(0);
+        SortArr.sort(function(a,b) {
+            var x = a.TheatreName.toLowerCase();
+            var y = b.TheatreName.toLowerCase();
 
-            {
-                return (a.TheatreName > b.TheatreName) ? 1 : 0;
-            }
-        );
+            return x < y ? -1 : x > y ? 1 : 0;
+        });
+        console.log(SortArr);
+
         return(
-           arr1.map((data,key)=>{
+            SortArr.map((data,key)=>{
                console.log(data);
+               //alert(data)
                 return(
-
                     <TouchableOpacity key={data._id}  style={styles.button} onPress={()=>this.ReleasedMovie(data._id)}>
-                    <CardItem  >
-                             <Text style={styles.textStyle}>{data.TheatreName}</Text>
-                    </CardItem>
+                        <View style={{flexDirection:'row'}}>
+                            <Image source={require('../Image/download2.jpeg')}
+                                style={{height:responsiveHeight(10) , width:responsiveWidth(20)}}/>
+                            <Card style={styles.containerStyle}>
+                                <CardItem style={styles.cardItemStyle} >
+                                    <Text style={styles.textStyle}>{data.TheatreName}</Text>
+                                </CardItem>
+                            </Card>
+                        </View>
                     </TouchableOpacity>
                     )
             })
@@ -86,8 +98,8 @@ const styles={
     bgImageStyle:{
         height:responsiveHeight(100),
         width:responsiveWidth(100),
-        justifyContent:'center',
-        alignItems: 'center'
+        justifyContent:'flex-start',
+        alignItems: 'flex-start'
 
     },
     cardItem:{
@@ -98,10 +110,29 @@ const styles={
         color:'white',
         fontSize:25
     },
-    button: {
-        alignItems: 'center',
-        justifyContent:'space-between',
-        paddingTop: 10
+    cardItemStyle:{
+        borderBottomWidth:1,
+        padding:5,
+        justifyContent:'flex-start',
+        flexDirection:'column',
+        borderColor:'#ddd',
+        backgroundColor:"#000"
+
+    },
+    containerStyle:{
+        paddingTop:10,
+        borderWidth:1,
+        borderRadius:2,
+        borderBottomWidth:0,
+        shadowOffset:{width:0,height:2},
+        shadowOpacity:0.5,
+        marginBottom:10,
+        marginLeft:7,
+        marginRight:7,
+        width:responsiveWidth(90),
+        height:responsiveHeight(10),
+        opacity:0.5,
+        backgroundColor:"#000"
     },
 }
 export default connect(mapStateToProps,mapDispatchToProps)(theatre);

@@ -4,7 +4,6 @@ import {View,TouchableOpacity,Image,Text} from 'react-native';
 import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 import LoginForm from '../LoginForm'
 import Register from '../Registration'
-import StartPage from '../StartPage'
 import Booking from '../Booking'
 import theatre from '../theatre'
 import MyTab from '../TAB';
@@ -23,7 +22,7 @@ const NavDrawer = DrawerNavigator({
     },
     {
         navigationOptions:({navigation})=>({
-            headerLeft : <View>
+            headerLeft : <View style={{paddingLeft:responsiveWidth(0.7)}}>
                 <TouchableOpacity onPress={()=> navigation.navigate("DrawerOpen")}>
                     <Image source={require('../../Image/list-menu.png')}
                            style={{height:responsiveHeight(4), width:responsiveWidth(8)}} />
@@ -33,21 +32,12 @@ const NavDrawer = DrawerNavigator({
     });
 const NavScreen=StackNavigator({
 
-
-
-
     initialPage:{
         screen:SplashScreen,
         navigationOptions:({navigation})=>({
             header:null
         })
     },
-        Start:{
-            screen:StartPage,
-            navigationOptions:({navigation})=>({
-                header:null
-            })
-        },
         Login:{
             screen:LoginForm
         },

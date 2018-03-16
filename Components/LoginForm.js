@@ -5,6 +5,7 @@ import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-nat
 import {checkSignIn} from './CheckSignIn'
 import {UserLogIn} from '../Components/redux/Action/actionUser'
 import {connect} from 'react-redux';
+import {NavigationActions} from "react-navigation";
 class LoginForm extends Component
 {
     state={email:'preema@gmail.com',password:'123',error:''};
@@ -51,6 +52,28 @@ class LoginForm extends Component
 
         }
 
+    }
+    Home()
+    {
+        /* var { navigate } = this.props.navigation;
+         navigate('Home')*/
+        this.props.navigation.dispatch(NavigationActions.reset({
+            index:0,
+            actions:[
+                NavigationActions.navigate(
+                    {
+                        routeName:'Home'
+                    }
+                )
+            ]
+        }))
+
+    }
+    Register()
+    {
+        debugger
+        var { navigate } = this.props.navigation;
+        navigate('Registration')
     }
 
     render()
@@ -115,7 +138,10 @@ class LoginForm extends Component
                                 </TouchableOpacity>
                             </CardItem>
                             </Card>
-
+                <Text style={styles.textStyle}>
+                    <Text onPress={()=>{this.Register()}}>SignUp</Text>
+                    <Text onPress={()=>{this.Home()}}>/Skip</Text>
+                </Text>
 
                 </ImageBackground>
             </View>
@@ -194,7 +220,7 @@ const styles ={
     },
     textStyle:{
         color:'#fff',
-        fontSize:responsiveFontSize(5)
+        fontSize:responsiveFontSize(2)
     },
     iconStyle:{
         justifyContent:'space-between',

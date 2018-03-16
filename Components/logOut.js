@@ -1,6 +1,5 @@
 import React,{Component} from 'react';
 import {Text,View,AsyncStorage,Alert} from 'react-native';
-import StartPage from './StartPage';
 import {UserLogOut} from './redux/Action/actionUser'
 import {connect} from 'react-redux';
 import {NavigationActions} from 'react-navigation';
@@ -22,7 +21,7 @@ class logOut extends Component
                     index:0,
                     actions:[
                         NavigationActions.navigate({
-                            routeName:'Start'
+                            routeName:'Login'
                         })
                     ]
                 }));
