@@ -17,9 +17,9 @@ const NavDrawer = DrawerNavigator({
         Home: { screen: MyTab },
         Location:{screen:Location},
         LogOut:{screen:logOut},
-        Profile:{screen:userProfile}
-
+        Profile:{screen:userProfile},
     },
+
     {
         navigationOptions:({navigation})=>({
             headerLeft : <View style={{paddingLeft:responsiveWidth(0.7)}}>

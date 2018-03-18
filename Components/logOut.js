@@ -13,6 +13,7 @@ class logOut extends Component
 
     componentWillReceiveProps(nextprops)
     {
+
         console.log(nextprops.status1);
         if(nextprops.status1===200)
         {
@@ -61,6 +62,7 @@ class logOut extends Component
 
 }
 const mapStateToProps=state=>{
+
     return{
         status1:state.User.status1
     }

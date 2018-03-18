@@ -4,7 +4,7 @@ import Home from './Home/Home'
 import MyApp from './Components/TAB'
 import LoginForm from './Components/LoginForm'
 import NavScreen from './Components/NavScreens/NavScreen'
-import ImageResize from './FileUpload/ImageResize'
+import Booking from './Components/Booking'
 import Reg from './Components/Registration'
 import SplashScreen from './Components/SplashScreen'
 import {createStore,applyMiddleware} from 'redux';
@@ -19,11 +19,10 @@ class App extends Component
         return(
 
             <Provider store={(createStore(appReducer,applyMiddleware(thunk)))}>
-                <NavScreen/>
+                <Booking/>
             </Provider>
         )
     }
 }
 export default App;
-
 

@@ -30,7 +30,6 @@ class MoviePoster extends Component
         this.setState({modalVisible:true,selectedMovie:data});
         Animated.timing(this.state.fadeIn,{
             toValue:1,
-            //easing:Easing.out(Easing.quad),
             duration:1000
         }).start();
     }

@@ -34,7 +34,6 @@ export function apiCall(url,type='get',data={},header={}) {
 
     else if(type=='put')
     {
-
         return axios.put(url,data,{header:reqheader}).then((response)=>{
 
             return Promise.resolve(response)

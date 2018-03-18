@@ -54,7 +54,8 @@ export const UserLogOut=()=>{
 
         
         return AsyncStorage.getItem('userToken').then((token) => {
-            debugger
+            console.log(token)
+
             if(!token)
             {
                 token="";
@@ -62,7 +63,7 @@ export const UserLogOut=()=>{
             return apiCall(constant.BASE_URL+constant.LOGOUT+'/'+token,'put',{},{'x-auth':token}).then((response)=>{
 
                 console.log(response.status);
-                
+
                 dispatch({
                     type:LOG_OUT,
                     payload:response.status

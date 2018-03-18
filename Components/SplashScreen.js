@@ -16,13 +16,27 @@ class SplashScreen extends Component
             if(!token)
             {
                 setTimeout(()=>{
-                    this.props.navigation.navigate('Login');
+                    this.props.navigation.dispatch(NavigationActions.reset({
+                        index:0,
+                        actions:[
+                            NavigationActions.navigate({
+                                routeName:'Login'
+                            })
+                        ]
+                    }));
                 },4000);
 
             }
             else {
                 setTimeout(()=>{
-                    this.props.navigation.navigate('Home');
+                    this.props.navigation.dispatch(NavigationActions.reset({
+                       index:0,
+                       actions:[
+                           NavigationActions.navigate({
+                               routeName:'Home'
+                           })
+                       ]
+                    }))
                 },4000);
 
             }
