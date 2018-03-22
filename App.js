@@ -7,19 +7,22 @@ import NavScreen from './Components/NavScreens/NavScreen'
 import Booking from './Components/Booking'
 import Reg from './Components/Registration'
 import SplashScreen from './Components/SplashScreen'
+import seatView from './Components/seatView'
 import {createStore,applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import appReducer from './Components/redux/Reducer'
 import thunk from 'redux-thunk'
 class App extends Component
 {
-    
+
     render()
-    {
+    {console.disableYellowBox=true;
         return(
 
             <Provider store={(createStore(appReducer,applyMiddleware(thunk)))}>
-                <Booking/>
+
+                <NavScreen/>
+
             </Provider>
         )
     }

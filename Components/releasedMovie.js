@@ -18,6 +18,10 @@ class releasedMovie extends Component
             loading:false,
             selectedMovie:''
         };
+       this.theatreId= (!this.props.navigation.state.params)?" ":this.props.navigation.state.params.data._id;
+        this.theatreName= (!this.props.navigation.state.params)?" ":this.props.navigation.state.params.data.TheatreName;
+        this.city=(!this.props.navigation.state.params)?" ":this.props.navigation.state.params.city;
+
     }
 
     openModal(data) {
@@ -36,7 +40,7 @@ class releasedMovie extends Component
     componentDidMount()
     {
         //getState.Movie.page=this.props.page
-        this.props.getMovieAction(this.props.navigation.state.params.theatrename);
+        this.props.getMovieAction(this.theatreId);
 
     }
     shouldComponentUpdate(nextprops,nextstate)
@@ -58,7 +62,7 @@ class releasedMovie extends Component
                             <Text style={styles.title}>{data.MovieId.Title}</Text>
                             <Text style={styles.genre}>{data.MovieId.Genre}</Text>
                         </View>
-                            <Button title="Book" onPress={()=>{this.props.navigation.navigate('Booking')}}></Button>
+                            <Button title="Book" onPress={()=>{this.props.navigation.navigate('Booking',{data,theatreName:this.theatreName,city:this.city,cityName:this.props.navigation.state.params.cityName,theatreId:this.theatreId})}}></Button>
                     </TouchableOpacity>
                 )
             })

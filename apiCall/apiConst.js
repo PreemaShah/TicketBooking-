@@ -1,10 +1,11 @@
 module.exports={
     BASE_URL:'http://localhost:3000/',
     MOVIE:'Movie',
-    USERS:'users',
-     LOGIN:'user',
-    CITY:'CityDetail',
-    THEATRE:'selectTheatre',
-    LOGOUT:'deleteToken',
-    MOVIERELEASED:'theatreMovie/getOne/'
-}
+    USERS:'/users/insert',
+    LOGIN:'user',
+    CITY:'city/getAll',
+    THEATRE:'theatre/getOne',
+    LOGOUT:'users/deleteToken',
+    MOVIERELEASED:'theatreMovie/getOne/',
+    GETSCREEN:'screen/getOne/'
+};

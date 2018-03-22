@@ -5,3 +5,4 @@ export const GET_CITY="GET_CITY";
 export const GET_THEATRE="GET_THEATRE";
 export const LOG_OUT="LOG_OUT";
 export const GET_RELEASEDMOVIE="GET_RELEASEDMOVIE";
+export const GET_SCREEN="GET_SCREEN";

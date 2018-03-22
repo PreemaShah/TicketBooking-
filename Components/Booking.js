@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import {Text,View,Animated,Dimensions,TouchableOpacity,ImageBackground} from 'react-native'
+import {CardItem,Button} from "./Common";
 import {responsiveWidth,responsiveHeight,responsiveFontSize} from "react-native-responsive-dimensions";
 let height=Dimensions.get('window').height;
 let width=Dimensions.get('window').width;
@@ -13,6 +14,13 @@ class Booking extends Component
             selectedSeat:0
         };
         this.val= new Animated.Value(height)
+        console.log(this.props.navigation.state.params);
+        this.movie=(!this.props.navigation.state.params)?" ":this.props.navigation.state.params.data.MovieId.Title;
+        this.tName=(!this.props.navigation.state.params)?" ":this.props.navigation.state.params.theatreName;
+        this.city=(!this.props.navigation.state.params)?" ":this.props.navigation.state.params.city;
+        this.cityName=(!this.props.navigation.state.params)?" ":this.props.navigation.state.params.cityName;
+        this.tId=(!this.props.navigation.state.params)?" ":this.props.navigation.state.params.theatreId;
+
     }
 
     componentDidMount() {
@@ -32,18 +40,30 @@ class Booking extends Component
         }
     };
 
+    onButtonClick()
+    {
+        if(this.state.selectedSeat>0)
+        {
+            console.log("Button clicked");
+            this.props.navigation.navigate('seat',{seat:this.state.selectedSeat,theatreId:this.tId});
+        }
+        else
+            {
+            alert("Please select number of seats");
+        }
+
+    }
+
     render()
     {
-
         return(
             <View  style={{justifyContent:'center',height:height,width:width}}>
                 <ImageBackground
                     style={styles.bgImageStyle}
-                    source={require('./../Image/download.jpeg')}
-                >
-                <Animated.View style={{height:300,width:400,backgroundColor:'#fff',opacity:0.5,transform:[{translateY:this.val}]}}>
+                    source={require('./../Image/download.jpeg')}>
+                <Animated.View style={{height:250,width:width,backgroundColor:'#fff',paddingLeft:10,paddingRight:10,opacity:0.5,transform:[{translateY:this.val}]}}>
                     <View>
-                        <Text style={styles.textStyle}>Balcony:</Text>
+                        <Text style={styles.textStyle}>Movie:{this.movie}</Text>
                     </View>
                     <View style={{width:1000,borderBottomWidth:2,justifyContent:'center',borderTopWidth:2,}}>
                     <View style={{width:300}}>
@@ -64,7 +84,22 @@ class Booking extends Component
                         }
                     </View>
                 </View>
+                    <View>
+                        <Text style={styles.textStyle}>Theater:{this.tName},
+                            <Text style={{fontSize:25}}>{this.cityName}</Text>
+                        </Text>
+                    </View>
+
+                    <CardItem style={styles.cardItemStyle}>
+                        <Button onPress={this.onButtonClick.bind(this)}
+                                style={styles.ButtonStyle}
+                        >Continue
+                        </Button>
+                    </CardItem>
                 </Animated.View>
+
+
+
                 </ImageBackground>
             </View>
              )
@@ -88,6 +123,25 @@ const styles={
     ArrtextStyle:{
         color:'black',
 
+    },
+    cardItemStyle:{
+        borderBottomWidth:1,
+        padding:5,
+        justifyContent:'flex-start',
+        flexDirection:'row',
+        borderColor:'#ddd',
+        backgroundColor:"#000",
+        opacity:0.5
+
+    },
+    ButtonStyle:{
+        alignSelf:'stretch',
+        flex:1,
+        backgroundColor:'#000',
+        borderWidth:1,
+        borderColor:'#000',
+        marginRight:5,
+        marginLeft:5,
     },
 }
 export default Booking;

@@ -16,8 +16,8 @@ class logOut extends Component
 
         console.log(nextprops.status1);
         if(nextprops.status1===200)
-        {
-            AsyncStorage.removeItem("userToken").then((success)=>{
+        {debugger
+            AsyncStorage.removeItem('userToken').then((success)=>{
                 this.props.navigation.dispatch(NavigationActions.reset({
                     index:0,
                     actions:[
@@ -26,7 +26,7 @@ class logOut extends Component
                         })
                     ]
                 }));
-                Alert.alert("successfully logout");
+                Alert.alert("success:",success);
             }).catch((err)=>{
 
                 console.log(err);
@@ -41,7 +41,7 @@ class logOut extends Component
     onLogout()
     {
         console.log("In Logout");
-
+        debugger
         this.props.UserLogOut();
         console.log(this.props)
     }
@@ -62,7 +62,7 @@ class logOut extends Component
 
 }
 const mapStateToProps=state=>{
-
+    debugger
     return{
         status1:state.User.status1
     }

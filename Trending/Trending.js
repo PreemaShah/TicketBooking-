@@ -72,7 +72,6 @@ class Trending extends Component
                                                                  <Text style={styles.title}  >{data.Title}</Text>
                                                                  <Text style={styles.genre}>{data.Genre}</Text>
                                                              </View>
-                                                             <Button title="Book" onPress={()=>{this.props.navigation.navigate('Booking')}}></Button>
                                                          </TouchableOpacity>)
                                                      }
 
@@ -96,7 +95,6 @@ class Trending extends Component
                                                    <Button
                                                        onPress={() => this.closeModal()}
                                                        title="X"
-
                                                    >
                                                    </Button>
 

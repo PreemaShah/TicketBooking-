@@ -71,7 +71,7 @@ class LoginForm extends Component
     }
     Register()
     {
-        debugger
+
         var { navigate } = this.props.navigation;
         navigate('Registration')
     }

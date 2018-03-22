@@ -9,6 +9,7 @@ class SplashScreen extends Component
 
     constructor(props){
         super(props);
+       // AsyncStorage.clear()
     }
     componentWillMount() {
         AsyncStorage.getItem('userToken').then((token)=>{
@@ -19,9 +20,11 @@ class SplashScreen extends Component
                     this.props.navigation.dispatch(NavigationActions.reset({
                         index:0,
                         actions:[
-                            NavigationActions.navigate({
+                            NavigationActions.navigate(
+                                {
                                 routeName:'Login'
-                            })
+                            }
+                            )
                         ]
                     }));
                 },4000);

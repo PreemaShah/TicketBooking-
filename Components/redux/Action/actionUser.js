@@ -28,13 +28,12 @@ export const UserReg=(Name,email,password,UserId)=>{
 
 
 export const UserLogIn=(email,password)=>{
-
     return(dispatch,getState)=>{
-
         return apiCall(constant.BASE_URL+constant.LOGIN,'post',{
             email:email,
             password:password
         },{}).then((doc)=>{
+
             console.log(doc);
             dispatch({
                 type:USER_LOGIN,
@@ -52,25 +51,26 @@ export const UserLogIn=(email,password)=>{
 export const UserLogOut=()=>{
     return(dispatch,getState)=> {
 
-        
         return AsyncStorage.getItem('userToken').then((token) => {
+
             console.log(token)
 
             if(!token)
             {
                 token="";
             }
-            return apiCall(constant.BASE_URL+constant.LOGOUT+'/'+token,'put',{},{'x-auth':token}).then((response)=>{
+            else{
 
-                console.log(response.status);
-
-                dispatch({
-                    type:LOG_OUT,
-                    payload:response.status
+                return apiCall(constant.BASE_URL+constant.LOGOUT,'put',{},{'x-auth':token}).then((response)=>{
+                    console.log(response.status);
+                    debugger
+                    dispatch({
+                        type:LOG_OUT,
+                        payload:response.status
+                    })
+                }).catch((err)=>{
+                    console.log(err)
                 })
-            }).catch((err)=>{
-                console.log(err)
-            })
-
+            }
         })}
 }

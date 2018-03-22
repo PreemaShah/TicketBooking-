@@ -28,7 +28,7 @@ const MyTab = TabNavigator(
 }, {
 
     tabBarPosition: 'bottom',
-    animationEnabled: true,
+        animationEnabled: true,
     tabBarOptions: {
         activeBackgroundColor: '#e6bab4',
         showLabel: false,

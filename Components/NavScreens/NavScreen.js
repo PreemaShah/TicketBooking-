@@ -11,11 +11,12 @@ import userProfile from '../userProfile'
 import Location from '../Location'
 import logOut from '../logOut'
 import SplashScreen from '../SplashScreen'
+import seatView from '../seatView'
 import ReleasedMovie from '../releasedMovie'
 
 const NavDrawer = DrawerNavigator({
         Home: { screen: MyTab },
-        Location:{screen:Location},
+        Book:{screen:Location},
         LogOut:{screen:logOut},
         Profile:{screen:userProfile},
     },
@@ -38,6 +39,9 @@ const NavScreen=StackNavigator({
             header:null
         })
     },
+    seat:{
+      screen:seatView
+    },
         Login:{
             screen:LoginForm
         },
@@ -55,7 +59,7 @@ const NavScreen=StackNavigator({
         Theatre:{
             screen:theatre
         },
-        Location:{
+        Book:{
             screen:Location
         },
         ReleasedMovie: {

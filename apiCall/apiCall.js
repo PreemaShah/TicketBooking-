@@ -6,7 +6,6 @@ export function apiCall(url,type='get',data={},header={}) {
     {
 
         return axios.get(url,{header:reqheader}).then((response)=>{
-
             return Promise.resolve(response);
 
         }).catch((err)=>{
@@ -34,15 +33,22 @@ export function apiCall(url,type='get',data={},header={}) {
 
     else if(type=='put')
     {
+
+        console.log(reqheader);
+
         return axios.put(url,data,{header:reqheader}).then((response)=>{
 
             return Promise.resolve(response)
-        }).catch((err)=>{
-            if(err.response!=undefined)
+        },(err)=>{
+            console.log(err)
+            return Promise.reject(err)
+        }).catch((err1)=>{
+
+            if(err1.response!=undefined)
             {
-                return err.response;
+                return err1.response;
             }
-            return err;
+            return err1;
         })
     }
 

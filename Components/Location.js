@@ -13,7 +13,7 @@ class Location extends Component
     }
 
     static navigationOptions = {
-        title: 'Location',
+        title: 'Book',
     };
     componentDidMount(){
         this.props.getCity();
@@ -26,13 +26,13 @@ class Location extends Component
 
                 <Picker selectedValue={this.state.selectedCity}
                         onValueChange={(itemValue, itemIndex) => {this.setState({selectedCity:itemValue})
-                                                                    this.props.navigation.navigate('Theatre',{itemValue})
+                                                                    this.props.navigation.navigate('Theatre',{city:itemValue._id,cityName:itemValue.city})
                         }}>
                     <Picker.Item label='select city'/>
                     {
                         this.props.city.map((value,key)=>{
                             return(
-                                <Picker.Item label={value.city} value={value._id} key={value._id}/>
+                                <Picker.Item label={value.city} value={value} key={value._id}/>
                             )
                         })
                     }

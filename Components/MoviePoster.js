@@ -56,19 +56,18 @@ class MoviePoster extends Component
 
     renderItems = () => {
         return (
-            this.props.movie.map((data,key)=>{
+            this.props.movie.map((data1,key)=>{
               //  console.log(data.Ratings);
                // if(data.Ratings<=7)
                 return (
-                    <TouchableOpacity key={data._id} onPress={()=>{this.openModal(data)}}>
+                    <TouchableOpacity key={data1._id} onPress={()=>{this.openModal(data1)}}>
                         <View style={styles.container}>
-                            <Image source={{uri:data.Poster}} style={styles.imageStyle} />
+                            <Image source={{uri:data1.Poster}} style={styles.imageStyle} />
                         </View>
                         <View style={{height:responsiveHeight(8),width:responsiveWidth(25)}}>
-                        <Text style={styles.title}  >{data.Title}</Text>
-                        <Text style={styles.genre}>{data.Genre}</Text>
+                        <Text style={styles.title}>{data1.Title}</Text>
+                        <Text style={styles.genre}>{data1.Genre}</Text>
                         </View>
-                        <Button title="Book" onPress={()=>{this.props.navigation.navigate('Location')}}></Button>
                     </TouchableOpacity>
                 )
             })

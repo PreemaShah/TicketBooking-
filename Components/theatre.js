@@ -7,25 +7,26 @@ import {connect} from 'react-redux'
 class theatre extends Component {
     constructor(props) {
         super(props)
+        this.cityName=(!this.props.navigation.state.params)?" ":this.props.navigation.state.params.cityName
     }
     static navigationOptions = {
         title: 'Theaters',
     };
     componentDidMount()
     {
-        console.log(this.props.navigation.state.params.itemValue);
-        this.props.getTheatreAction(this.props.navigation.state.params.itemValue);
+        console.log(this.props.navigation.state.params.city);
+        this.props.getTheatreAction(this.props.navigation.state.params.city);
     }
     shouldComponentUpdate(nextprops,nextstate)
     {
         console.log(this.props.thtr);
         return true
     }
-    ReleasedMovie(theatrename)
+    ReleasedMovie(data)
     {
         console.log("theater name");
-        console.log(theatrename);
-        this.props.navigation.navigate('ReleasedMovie',{theatrename})
+        console.log(data);
+        this.props.navigation.navigate('ReleasedMovie',{data,city:this.props.navigation.state.params.city,cityName:this.cityName})
     }
 
     displayThtr=()=>
@@ -48,7 +49,7 @@ class theatre extends Component {
                console.log(data);
                //alert(data)
                 return(
-                    <TouchableOpacity key={data._id}  style={styles.button} onPress={()=>this.ReleasedMovie(data._id)}>
+                    <TouchableOpacity key={data._id}  style={styles.button} onPress={()=>this.ReleasedMovie(data)}>
                         <View style={{flexDirection:'row'}}>
                             <Image source={require('../Image/download2.jpeg')}
                                 style={{height:responsiveHeight(10) , width:responsiveWidth(20)}}/>
